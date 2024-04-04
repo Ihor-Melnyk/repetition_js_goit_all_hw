@@ -1,1 +1,1 @@
-# rrepetition_js_goit_all_hw
+# repetition_js_goit_all_hw
