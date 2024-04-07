@@ -6,3 +6,5 @@ liRef.forEach((x) => {
   console.log("Category: ", x.children[0].textContent);
   console.log("Elements: ", x.children[1].childElementCount);
 });
+
+//
