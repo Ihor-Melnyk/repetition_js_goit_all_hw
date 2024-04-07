@@ -12,6 +12,7 @@ const refs = {
 };
 
 function createBoxes(amount) {
+  refs.boxes.innerHTML = "";
   let boxes = "";
   for (let index = 0; index < amount; index++) {
     boxes += `<div style="width: ${30 + 10 * index}px; height: ${30 + 10 * index}px; background-color: ${getRandomHexColor()}"></div>`;
