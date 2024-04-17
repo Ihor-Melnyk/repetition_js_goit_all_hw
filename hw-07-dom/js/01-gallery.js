@@ -1,13 +1,9 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
-console.log(galleryItems);
-
-const markUpGalleryItems = galleryItems
+const markup = galleryItems
   .map(
-    ({ preview, original, description }) => `
-<li class="gallery__item">
-  <a class="gallery__link" href="large-image.jpg">
+    ({ description, original, preview }) => `<li class="gallery__item">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
       src="${preview}"
@@ -15,12 +11,27 @@ const markUpGalleryItems = galleryItems
       alt="${description}"
     />
   </a>
-</li>
-`
+</li>`
   )
   .join("");
 
-const ulEl = document.querySelector(".gallery");
-ulEl.insertAdjacentHTML("afterbegin", markUpGalleryItems);
+const ulElem = document.querySelector(".gallery");
+ulElem.insertAdjacentHTML("beforeend", markup);
 
-ulEl.addEventListener("click", (e) => {});
+ulElem.addEventListener("click", handleClickImage);
+function handleClickImage(e) {
+  if (e.target.nodeName != "IMG") return;
+  e.preventDefault();
+
+  const handleKeyEscape = (e) => {
+    if (e.key !== "Escape") return;
+    instance.close();
+  };
+
+  const instance = basicLightbox.create(`<img src="${e.target.dataset.source}">`, {
+    onShow: (instance) => window.addEventListener("keydown", handleKeyEscape),
+    onClose: (instance) => window.removeEventListener("keydown", handleKeyEscape),
+  });
+
+  instance.show();
+}
